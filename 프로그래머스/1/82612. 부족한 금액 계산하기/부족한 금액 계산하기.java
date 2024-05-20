@@ -6,8 +6,6 @@ class Solution {
         	answer += sumPrice;
         	sumPrice += price;
         }
-        long a = money-answer;
-        if(a<0) return a*-1;
-        else return 0;
+        return Math.max((money-answer)*-1, 0);
     }
 }
