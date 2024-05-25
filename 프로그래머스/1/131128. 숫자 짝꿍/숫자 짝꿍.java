@@ -6,11 +6,11 @@ class Solution {
 
         for(char x : X.toCharArray()){
             int i = Character.getNumericValue(x);
-            xArr[i]+=1;
+            xArr[i]++;
         }
         for(char y : Y.toCharArray()){
             int i = Character.getNumericValue(y);
-            yArr[i]+=1;
+            yArr[i]++;
         }
 
         StringBuilder sb = new StringBuilder();
