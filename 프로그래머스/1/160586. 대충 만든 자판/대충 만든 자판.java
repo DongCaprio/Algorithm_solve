@@ -16,12 +16,12 @@ class Solution {
         	String key = targets[i];
         	int count = 0;
         	for(int j=0; j<key.length(); j++) {
-        		Integer inte = map.get(key.charAt(j));
-        		if(inte == null) {
+        		if(map.containsKey(key.charAt(j))) {
+        			count += map.get(key.charAt(j));
+        		}else {
         			count = -1;
         			break;
         		}
-        		count += inte;
         	}
         	answer[i] = count;
         }
