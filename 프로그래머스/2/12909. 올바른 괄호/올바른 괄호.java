@@ -5,15 +5,16 @@ class Solution {
         boolean answer = true;
 
         Stack<Character> st = new Stack<>();
-        if(s.charAt(0) == ')') return false;
-        else st.push(s.charAt(0));
-
-        for(int i=1; i<s.length(); i++){
-            if(s.charAt(i) == '(') st.push(s.charAt(i));
-            else if(!st.empty() && s.charAt(i) == ')' && st.peek() == '(') st.pop();
-            else return false;
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == '(') st.push('(');
+            else{
+                if(!st.isEmpty() && st.peek()== '(') st.pop();
+                else st.push(')');
+            }
         }
-        if(!st.isEmpty()) return false;
+        
+        if(!st.isEmpty()) answer = false;
+
         return answer;
     }
 }
