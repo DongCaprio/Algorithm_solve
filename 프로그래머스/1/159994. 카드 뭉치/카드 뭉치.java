@@ -11,9 +11,9 @@ class Solution {
 
         for(String x : goal){
             if(!d1.isEmpty() && d1.peek().equals(x)){
-                d1.remove();
+                d1.poll();
             }else if(!d2.isEmpty() &&d2.peek().equals(x)){
-                d2.remove();
+                d2.poll();
 
             }else{
                 return "No";
