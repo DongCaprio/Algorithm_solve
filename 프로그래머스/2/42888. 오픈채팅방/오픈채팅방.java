@@ -26,8 +26,8 @@ class Solution {
         	String x = list.get(i);
         	int idx = x.indexOf("님이");
         	String id = x.substring(0, idx);
-        	String newStr = nameMap.get(id) + x.substring(idx);
-        	list.set(i, newStr);
+        	x = x.replace(id, nameMap.get(id));
+        	list.set(i, x);
         }
         answer = list.stream().toArray(String[]::new);
         return answer;
