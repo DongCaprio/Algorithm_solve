@@ -1,20 +1,13 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class Solution {
     public int solution(int[] nums) {
-        int answer = 0;
-        
-        int getnums = nums.length/2;
-        Set<Integer> set = new HashSet<Integer>();
-        for(int x : nums) {
-        	set.add(x);
-        }
-        if(set.size() < getnums) {
-        	answer = set.size();
-        }else {
-        	answer = getnums;
-        }
-        return answer;
+        Set<Integer> integerSet = Arrays.stream(nums)
+                .boxed()
+                .collect(Collectors.toSet());
+        return Math.min(nums.length / 2, integerSet.size());
     }
 }
