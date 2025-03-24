@@ -2,7 +2,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
-    
     class Node {
         int x;
         int y;
@@ -13,45 +12,40 @@ class Solution {
         }
     }
 
+    int[][] visited;
+
+    int[] go1 = {1, 0, 0, -1};
+    int[] go2 = {0, 1, -1, 0};
 
     public int solution(int[][] maps) {
-        int y = maps.length;
-        int x = maps[0].length;
-
-        int[][] crossShape = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
-
-        int[][] distance = new int[y][x];
+        visited = new int[maps.length][maps[0].length];
         Queue<Node> Q = new LinkedList<>();
         Q.offer(new Node(0, 0));
-        distance[0][0] = 1;
+        visited[0][0] = 1;
 
         while (!Q.isEmpty()) {
-            Node pollQ = Q.poll();
+            Node now = Q.poll();
 
-            int xQ = pollQ.x;
-            int yQ = pollQ.y;
+            for (int i = 0; i < go1.length; i++) {
+                int nx = now.x + go1[i];
+                int ny = now.y + go2[i];
 
-            for (int[] move : crossShape) {
-                int nextX = xQ + move[0];
-                int nextY = yQ + move[1];
-
-                if (nextX < 0 || nextY < 0 || nextX >= x || nextY >= y) {
+                if (nx < 0 || ny < 0 || nx >= maps[0].length || ny >= maps.length
+                        || maps[ny][nx] == 0) {
                     continue;
                 }
-                if (maps[nextY][nextX] == 0) {
-                    continue;
-                }
-                if (distance[nextY][nextX] == 0) {
-                    distance[nextY][nextX] = distance[yQ][xQ] + 1;
-                    Q.offer(new Node(nextX, nextY));
+
+                if (visited[ny][nx] == 0) {
+                    Q.offer(new Node(nx, ny));
+                    visited[ny][nx] = visited[now.y][now.x] + 1;
                 }
             }
         }
 
-        if (distance[y - 1][x - 1] == 0) {
-            return -1;
+        if (visited[maps.length - 1][maps[0].length - 1] > 0) {
+            return visited[maps.length - 1][maps[0].length - 1];
         }
-
-        return distance[y - 1][x - 1];
+        return -1;
     }
+
 }
