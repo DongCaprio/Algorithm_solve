@@ -1,0 +1,24 @@
+class Solution {
+    int[] numbers;
+    int target;
+    int answer = 0;
+
+    public int solution(int[] numbers, int target) {
+        this.numbers = numbers;
+        this.target = target;
+        dfs(0, 0);
+        return answer;
+    }
+
+    public void dfs(int i, int total) {
+        if (i == numbers.length) {
+            if (total == target) {
+                answer++;
+            }
+            return;
+        }
+
+        dfs(i + 1, total + numbers[i]);
+        dfs(i + 1, total - numbers[i]);
+    }
+}
