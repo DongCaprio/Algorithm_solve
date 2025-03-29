@@ -7,12 +7,13 @@ class Solution {
         answer = Math.max(answer, cnt);
 
         for (int i = 0; i < visited.length; i++) {
-            if (!visited[i] && dungeons[i][0] <= k) {
+            if (!visited[i] && k >= dungeons[i][0]) {
                 visited[i] = true;
                 backtrack(k - dungeons[i][1], cnt + 1);
                 visited[i] = false;
             }
         }
+
     }
 
     public int solution(int k, int[][] dungeons) {
