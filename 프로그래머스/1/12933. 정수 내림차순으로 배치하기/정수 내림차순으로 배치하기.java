@@ -1,20 +1,17 @@
-import java.util.*;
+import java.util.PriorityQueue;
+
 class Solution {
     public long solution(long n) {
-        long answer = 0;
-        ArrayList<Long> list = new ArrayList<>();
-        while(n>0){
-            long m = n%10;
-            list.add(m);
-            n = n/10;
+        PriorityQueue<Integer> Q = new PriorityQueue<>((o1, o2) -> Integer.compare(o2, o1));
+        String s = String.valueOf(n);
+        for (char a : s.toCharArray()) {
+            Q.offer(Character.getNumericValue(a));
         }
-        Collections.sort(list, Collections.reverseOrder());
         StringBuilder sb = new StringBuilder();
-        for(Long l : list){
-            sb.append(l);
+        while (!Q.isEmpty()) {
+            sb.append(Q.poll());
         }
-        String str = sb.toString();
-        answer = Long.parseLong(str);
-        return answer;
+        String string = sb.toString();
+        return Long.parseLong(string);
     }
 }
