@@ -1,30 +1,43 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class Solution {
     public int[] solution(int[] answers) {
-        int[][] pattern = {
-                {1, 2, 3, 4, 5},
-                {2, 1, 2, 3, 2, 4, 2, 5},
-                {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
-        };
-        int[] scores = new int[3];
+        int[] answer = {};
 
-        for(int i=0; i<answers.length; i++){
-            for(int j=0; j< pattern.length; j++){
-                if(answers[i] == pattern[j][i % pattern[j].length]){
-                    scores[j]++;
-                }
+        int[] one = {1, 2, 3, 4, 5};
+        int[] two = {2, 1, 2, 3, 2, 4, 2, 5};
+        int[] three = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+
+        int c1 = 0, c2 = 0, c3 = 0;
+
+        for (int i = 0; i < answers.length; i++) {
+            int n1 = i % one.length;
+            int n2 = i % two.length;
+            int n3 = i % three.length;
+
+            if (one[n1] == answers[i]) {
+                c1++;
+            }
+            if (two[n2] == answers[i]) {
+                c2++;
+            }
+            if (three[n3] == answers[i]) {
+                c3++;
             }
         }
-
-        int max = Arrays.stream(scores).max().getAsInt();
+        int maxScore = Math.max(c1, Math.max(c2, c3));
         ArrayList<Integer> list = new ArrayList<>();
-        for(int i=0; i<scores.length; i++){
-            if(scores[i] == max) list.add(i+1);
-        }
 
-        return list.stream().sorted().mapToInt(Integer::intValue).toArray();
+        if (c1 == maxScore) {
+            list.add(1);
+        }
+        if (c2 == maxScore) {
+            list.add(2);
+        }
+        if (c3 == maxScore) {
+            list.add(3);
+        }
+        
+        return list.stream().mapToInt(i -> i).toArray();
     }
-    
 }
