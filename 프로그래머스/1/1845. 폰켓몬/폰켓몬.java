@@ -1,13 +1,17 @@
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        Set<Integer> integerSet = Arrays.stream(nums)
-                .boxed()
-                .collect(Collectors.toSet());
-        return Math.min(nums.length / 2, integerSet.size());
+        int answer = 0;
+        Set<Integer> set = new HashSet<>();
+        for(int num : nums) {
+            set.add(num);
+        }
+        System.out.println(set.size());
+        
+        if(set.size() >= nums.length/2) {
+            return nums.length/2;
+        }
+        return set.size();
     }
 }
