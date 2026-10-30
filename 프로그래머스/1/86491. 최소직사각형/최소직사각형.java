@@ -2,16 +2,22 @@ import java.util.*;
 class Solution {
     public int solution(int[][] sizes) {
         int answer = 0;
-        int leftMax =0, rightMax =0;
-        for(int i=0; i<sizes.length; i++){
-            if(sizes[i][0] < sizes[i][1]){
-                int tmp = sizes[i][0];
-                sizes[i][0] = sizes[i][1];
-                sizes[i][1] = tmp;
-            }
-            leftMax = Math.max(leftMax, sizes[i][0]);
-            rightMax = Math.max(rightMax, sizes[i][1]);
+        int w = 0;
+        int h = 0;
+            
+        
+        for(int[] a : sizes) {
+            int width = a[0];
+            int height = a[1];
+            
+            int rw = Math.max(width, height);
+            int rh = Math.min(width, height);
+            
+            w = Math.max(rw, w);
+            h = Math.max(rh, h);
         }
-        return leftMax*rightMax;
+        
+        
+        return w*h;
     }
 }
