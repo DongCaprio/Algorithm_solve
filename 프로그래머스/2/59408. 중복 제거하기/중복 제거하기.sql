@@ -1,6 +1,4 @@
 -- 코드를 입력하세요
-SELECT COUNT(*) count FROM (
-
-SELECT NAME, COUNT(*) COUNT FROM ANIMAL_INS AI
-WHERE AI.NAME IS NOT NULL
-GROUP BY AI.NAME) AB
+select count(distinct name)
+from animal_ins
+where name is not null;
